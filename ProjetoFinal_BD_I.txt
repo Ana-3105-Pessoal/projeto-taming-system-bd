@@ -1,168 +1,78 @@
-entidades
-jogador
-espécie
-criatura
-domesticação
-mapa
-tribo
-
-**Tribe**
-- id_tribe (PK)
-- name (UNIQUE)
-- founding_date
-- max_members (CHECK > 0)
-
-**Player**
-- id_player (PK)
-- username (UNIQUE)
-- level (CHECK 1–100)
-- join_date
-- id_tribe (FK, nullable — player pode não ter tribo)
-
-**Creature**
-- id_creature (PK)
-- nickname
-- level (CHECK 1–150)
-- sex (CHECK: 'M' / 'F')
-- status (CHECK: 'wild' / 'tamed' / 'dead')
-- health
-- stamina
-- id_specie (FK)
-- id_player (FK, nullable — criatura pode ser selvagem)
-
-**Specie**
-- id_specie (PK)
-- name (UNIQUE)
-- diet (CHECK: 'carnivore' / 'herbivore' / 'omnivore' / 'piscivore')
-- threat_level (CHECK 1–5)
-- can_fly (boolean)
-- can_swim (boolean)
-
-**Map**
-- id_map (PK)
-- name (UNIQUE)
-- biome (CHECK: 'jungle' / 'arctic' / 'desert' / 'ocean' / 'volcanic')
-- difficulty (CHECK 1–5)
-
-**Mutation**
-- id_mutation (PK)
-- attribute (CHECK: 'health' / 'stamina' / 'melee' / 'speed' / 'weight')
-- description
-
-**Item**
-- id_item (PK)
-- name (UNIQUE)
-- type (CHECK: 'kibble' / 'narcotic' / 'food' / 'tool')
-- rarity (CHECK: 'common' / 'uncommon' / 'rare' / 'legendary')
-
----
-
-**Entidades associativas:**
-
-**Domestication** (Player + Creature)
-- id_domestication (PK)
-- id_player (FK)
-- id_creature (FK)
-- tame_date
-- method (CHECK: 'passive' / 'violent')
-- effectiveness (CHECK 0–100)
-- time_spent_min
-
-**Creature_mutation** (Creature + Mutation)
-- id_creature (FK)
-- id_mutation (FK)
-- generation (CHECK >= 1)
-- value (o quanto aquele atributo foi incrementado)
-
-**Spawn_rate** (Specie + Map)
-- id_specie (FK)
-- id_map (FK)
-- frequency (CHECK: 'rare' / 'uncommon' / 'common')
-
-**Inventory** (Player + Item)
-- id_player (FK)
-- id_item (FK)
-- quantity (CHECK > 0)
-
-
-
-
-
 **Tribe**
 - id_tribe: SERIAL (PK)
-- fk_player: INTEGER (FK)
-- name: VARCHAR(100)
-- max_members: INTEGER
+- name: VARCHAR(100) UNIQUE
 - founding_date: DATE
+- max_members: INTEGER CHECK (max_members > 0)
 
 **Player**
 - id_player: SERIAL (PK)
-- username: VARCHAR(50)
-- level: INTEGER
-- health: NUMERIC(8,2)
-- stamina: NUMERIC(8,2)
+- username: VARCHAR(50) UNIQUE
+- level: INTEGER CHECK (level BETWEEN 1 AND 100)
 - join_date: DATE
+- id_tribe: INTEGER (FK, NULL)
 
 **Creature**
 - id_creature: SERIAL (PK)
 - nickname: VARCHAR(100)
-- sex: CHAR(1)
-- status: VARCHAR(20)
+- level: INTEGER CHECK (level BETWEEN 1 AND 150)
+- sex: CHAR(1) CHECK (sex IN ('M', 'F'))
+- status: VARCHAR(20) CHECK (status IN ('wild', 'tamed', 'dead'))
 - health: NUMERIC(8,2)
 - stamina: NUMERIC(8,2)
+- id_specie: INTEGER (FK)
+- id_player: INTEGER (FK, NULL)
 
 **Specie**
 - id_specie: SERIAL (PK)
-- name: VARCHAR(100)
-- diet: VARCHAR(20)
-- threat_level: INTEGER
+- name: VARCHAR(100) UNIQUE
+- diet: VARCHAR(20) CHECK (diet IN ('carnivore', 'herbivore', 'omnivore', 'piscivore'))
+- threat_level: INTEGER CHECK (threat_level BETWEEN 1 AND 5)
 - can_fly: BOOLEAN
 - can_swim: BOOLEAN
 
 **Map**
 - id_map: SERIAL (PK)
-- name: VARCHAR(100)
-- biome: VARCHAR(30)
-- difficulty: INTEGER
-
-**Item**
-- id_item: SERIAL (PK)
-- name: VARCHAR(100)
-- type: VARCHAR(20)
-- rarity: VARCHAR(20)
+- name: VARCHAR(100) UNIQUE
+- biome: VARCHAR(30) CHECK (biome IN ('jungle', 'arctic', 'desert', 'ocean', 'volcanic'))
+- difficulty: INTEGER CHECK (difficulty BETWEEN 1 AND 5)
 
 **Mutation**
 - id_mutation: SERIAL (PK)
-- attribute: VARCHAR(20)
+- attribute: VARCHAR(20) CHECK (attribute IN ('health', 'stamina', 'melee', 'speed', 'weight'))
 - description: TEXT
+
+**Item**
+- id_item: SERIAL (PK)
+- name: VARCHAR(100) UNIQUE
+- type: VARCHAR(20) CHECK (type IN ('kibble', 'narcotic', 'food', 'tool'))
+- rarity: VARCHAR(20) CHECK (rarity IN ('common', 'uncommon', 'rare', 'legendary'))
 
 ---
 
-**Associativas:**
+**Entidades associativas**
 
 **Domestication**
 - id_domestication: SERIAL (PK)
-- fk_player: INTEGER (FK)
-- fk_creature: INTEGER (FK)
+- id_player: INTEGER (FK)
+- id_creature: INTEGER (FK)
 - tame_date: DATE
-- method: VARCHAR(20)
-- effectiveness: NUMERIC(5,2)
+- method: VARCHAR(20) CHECK (method IN ('passive', 'violent'))
+- effectiveness: NUMERIC(5,2) CHECK (effectiveness BETWEEN 0 AND 100)
 - time_spent_min: INTEGER
 
 **Creature_mutation**
-- fk_creature: INTEGER (FK)
-- fk_mutation: INTEGER (FK)
-- generation: INTEGER
+- id_creature: INTEGER (FK)
+- id_mutation: INTEGER (FK)
+- generation: INTEGER CHECK (generation >= 1)
 - value: NUMERIC(8,2)
 
 **Spawn_rate**
-- fk_specie: INTEGER (FK)
-- fk_map: INTEGER (FK)
-- frequency: VARCHAR(20)
+- id_specie: INTEGER (FK)
+- id_map: INTEGER (FK)
+- frequency: VARCHAR(20) CHECK (frequency IN ('rare', 'uncommon', 'common'))
 
-**Inventory_stores**
-- fk_player: INTEGER (FK)
-- fk_item: INTEGER (FK)
-- quantity: INTEGER
-
+**Inventory**
+- id_player: INTEGER (FK)
+- id_item: INTEGER (FK)
+- quantity: INTEGER CHECK (quantity > 0)
 
