@@ -20,7 +20,6 @@
 - health: NUMERIC(8,2)
 - stamina: NUMERIC(8,2)
 - id_specie: INTEGER (FK)
-- id_player: INTEGER (FK, NULL)
 
 **Specie**
 - id_specie: SERIAL (PK)
@@ -45,7 +44,7 @@
 - id_item: SERIAL (PK)
 - name: VARCHAR(100) UNIQUE
 - type: VARCHAR(20) CHECK (type IN ('kibble', 'narcotic', 'food', 'tool'))
-- rarity: VARCHAR(20) CHECK (rarity IN ('common', 'uncommon', 'rare', 'legendary'))
+- rarity: VARCHAR(20) CHECK (rarity IN ('common', 'uncommon', 'rare', 'epic', 'legendary'))
 
 ---
 

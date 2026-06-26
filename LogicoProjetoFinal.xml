@@ -1071,7 +1071,7 @@
     <Tabela ID="12">
         <Bounds Height="127" Left="478" Top="605" Width="150"/>
         <DisablePainted Valor="false"/>
-        <Texto>Inventory_stores</Texto>
+        <Texto>Inventory</Texto>
         <Observacao/>
         <Dicionario/>
         <Fonte Estilo="1" Nome="Arial" Tamanho="12"/>

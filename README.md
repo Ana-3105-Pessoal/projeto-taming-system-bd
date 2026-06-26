@@ -11,21 +11,6 @@ Projetar, modelar e implementar um banco de dados relacional completo, cobrindo 
 
 ---
 
-## 🗂️ Estrutura do Projeto
-
-```
-ark-taming-db/
-├── docs/
-│   ├── MER.png              # Modelo Entidade-Relacionamento
-│   ├── DER.png              # Modelo Lógico
-│   └── relatorio.pdf        # Relatório técnico completo
-├── sql/
-│   └── schema.sql           # Script de criação e inserção
-└── README.md
-```
-
----
-
 ## 🧩 Entidades
 
 | Tabela | Descrição |
