@@ -93,7 +93,7 @@ select * from creature -- add 0 creatures
 select * from spawn_rate -- add 10 spawn_rate
 select * from creature_mutation -- add 0 creature_mutation
 select * from domestication -- add 0 domestication
-select * from inventory -- 0 inventory
+select * from inventory -- add 0 inventory
 
 insert into map (name,biome,difficulty)
 values
@@ -171,3 +171,5 @@ values
 ((select id_specie from specie where name = 'Therizinosaur'),(select id_map from map where name = 'Lost Colony'), 'uncommon'),
 ((select id_specie from specie where name = 'Dire Bear'),(select id_map from map where name = 'Valguero'), 'uncommon'),
 ((select id_specie from specie where name = 'Deinosuchus'),(select id_map from map where name = 'The Island'), 'rare')
+
+alter table creature add column level integer check (level >= 1)
