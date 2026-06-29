@@ -87,7 +87,7 @@ select * from mutation -- add 0 mutations
 select * from specie -- add 10 species
 select * from map -- add 9 maps
 select * from tribe -- add 3 tribes
-select * from item -- add 0 items
+select * from item -- add 21 items
 select * from player -- add 0 players
 select * from creature -- add 0 creatures
 select * from spawn_rate -- add 10 spawn_rate
@@ -173,3 +173,33 @@ values
 ((select id_specie from specie where name = 'Deinosuchus'),(select id_map from map where name = 'The Island'), 'rare')
 
 alter table creature add column level integer check (level >= 1)
+
+alter table spawn_rate add constraint id_spawn_rate primary key (fk_specie,fk_map)
+
+alter table creature_mutation add constraint id_creature_mutation primary key (fk_creature,fk_mutation)
+
+alter table inventory add constraint id_inventory primary key (fk_player,fk_item)
+
+insert into item (name,type,rarity)
+values
+('Tranq Arrow','ammo','primitive'),
+('Stone Arrow','ammo','primitive'),
+('Tranquilizer Dart','ammo','primitive'),
+('Simple Rifle Ammo','ammo','primitive'),
+('Bow Primitive','weapon','primitive'),
+('Bow Apprentice','weapon','apprentice'),
+('Crossbow Journeyman','weapon','journeyman'),
+('Crossbow Primitive','weapon','primitive'),
+('Longneck Rifle Primitive','weapon','primitive'),
+('Longneck Rifle Mastercraft','weapon','mastercraft'),
+('Extraordinary Kibble','kibble','ascendant'),
+('Superior Kibble','kibble','journeyman'),
+('Simple Kibble','kibble','ramshackle'),
+('Raw Mutton','consumable','primitive'),
+('Metal Ingot','resources','primitive'),
+('Raw Meat','consumable','primitive'),
+('Wood','resources','primitive'),
+('Stone','resources','primitive'),
+('Argentavis Saddle','equipment','primitive'),
+('Rex Saddle','equipment','primitive'),
+('Therizinosaur Saddle','equipment','primitive')
