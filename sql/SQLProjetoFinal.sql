@@ -204,14 +204,40 @@ values
 ('Rex Saddle','equipment','primitive'),
 ('Therizinosaur Saddle','equipment','primitive')
 
-(rarity in('primitive', 'ramshackle', 'apprentice', 'journeyman', 'mastercraft', 'ascendant'))
-(type in('resources','consumable','weapon','equipment','kibble','ammo'))
-
 insert into player (username,level,health,stamina,join_date)
 values
 ('Helena Walker',200,100000,1000,'2020-01-01'),
 ('Edmund Rockwell',155,50000,2000,'2000-05-12'),
-('Mei Yin Li ',198,80000,3000,'2000-04-27'),
+('Mei Yin Li',198,80000,3000,'2000-04-27'),
 ('Gaius Marcellus Nerva',100,25000,1000,'2010-05-23'),
 ('Diana',175,60000,1500,'2001-08-21'),
 ('Santiago',199,90000,2500,'1990-12-30')
+
+update tribe
+set name = 'Tribe Tech'
+where name = 'Cave Explores'
+
+update tribe
+set name = 'The New Legion'
+where name = 'Rising Tribe'
+
+update player
+set fk_tribe = (select id_tribe from tribe where name = 'The New Legion')
+where username = 'Gaius Marcellus Nerva'
+
+update player
+set fk_tribe = (select id_tribe from tribe where name = 'Tribe Tech')
+where username = 'Diana'
+
+update player
+set fk_tribe = (select id_tribe from tribe where name = 'Tribe Tech')
+where username = 'Santiago'
+
+insert into inventory (fk_player, fk_item, quantity)
+values
+((select id_player from player where username = 'Mei Yin Li'), (select id_item from item where name = 'Rex Saddle'),1),
+((select id_player from player where username = 'Santiago'), (select id_item from item where name = 'Longneck Rifle Mastercraft'),1),
+((select id_player from player where username = 'Santiago'), (select id_item from item where name = 'Tranquilizer Dart'),100),
+((select id_player from player where username = 'Santiago'), (select id_item from item where name = 'Simple Rifle Ammo'),400),
+((select id_player from player where username = 'Diana'), (select id_item from item where name = 'Therizinosaur Saddle'),1),
+((select id_player from player where username = 'Diana'), (select id_item from item where name = 'Therizinosaur Saddle'),1)
