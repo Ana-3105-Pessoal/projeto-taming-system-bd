@@ -92,7 +92,7 @@ select * from player -- add 7 players
 select * from creature -- add 2 creatures
 select * from spawn_rate -- add 10 spawn_rate
 select * from creature_mutation -- add 0 creature_mutation
-select * from domestication -- add 0 domestication
+select * from domestication -- add 1 domestication
 select * from inventory -- add 7 inventory
 
 insert into map (name,biome,difficulty)
@@ -281,3 +281,28 @@ values
 ((select id_specie from specie where name = 'Dodo'),'Dodo','F','wild',350,120,120),
 ((select id_specie from specie where name = 'Parasaur'),'Parasaur','M','wild',2086,1228,80)
 
+begin transaction;
+
+insert into domestication (fk_player, fk_creature,tame_date,method,effectiveness,time_spent_min)
+values
+((select id_player from player where username = 'Bob'),(select id_creature from creature where nickname = 'Dodo'),'2026-06-09','violent',99.9,5);
+
+update creature
+set status = 'tamed'
+where nickname = 'Dodo';
+
+update creature
+set nickname = 'Dodozinho'
+where nickname = 'Dodo';
+
+update creature
+set level = 179
+where nickname = 'Dodozinho';
+
+commit
+
+select player.username, creature.nickname, creature.status, domes.method
+from domestication domes
+join player on id_player = fk_player
+join creature on id_creature = fk_creature
+where username = 'Bob'
