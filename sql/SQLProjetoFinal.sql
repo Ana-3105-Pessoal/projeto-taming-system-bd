@@ -84,12 +84,12 @@ create table inventory (
 );
 
 select * from mutation -- add 0 mutations
-select * from specie -- add 10 species
+select * from specie -- add 16 species
 select * from map -- add 9 maps
 select * from tribe -- add 3 tribes
 select * from item -- add 21 items
-select * from player -- add 6 players
-select * from creature -- add 0 creatures
+select * from player -- add 7 players
+select * from creature -- add 2 creatures
 select * from spawn_rate -- add 10 spawn_rate
 select * from creature_mutation -- add 0 creature_mutation
 select * from domestication -- add 0 domestication
@@ -253,3 +253,31 @@ select player.username, tribe.name
 from player
 join tribe on id_tribe = fk_tribe
 where name = 'Tribe Tech'
+
+insert into player (username,level,health,stamina,join_date)
+values
+('Bob',1,100,100,'2026-06-09')
+
+update player
+set fk_tribe = (select id_tribe from tribe where name = 'The Nobby Survive')
+where username = 'Bob'
+
+insert into inventory (fk_player, fk_item, quantity)
+values
+((select id_player from player where username = 'Bob'), (select id_item from item where name = 'Wood'),100),
+((select id_player from player where username = 'Bob'), (select id_item from item where name = 'Stone'),100)
+
+insert into specie (name, diet, threat_level,can_fly,can_swim)
+values
+('Dodo','herbivore',1,false, true),
+('Moschops','omnivore',1,false,true),
+('Parasaur','herbivore',1,false,true),
+('Pteranodon','carnivore',1,true,false),
+('Jerboa','herbivore',1,false,true),
+('Raptor','carnivore',3.,false,true)
+
+insert into creature (fk_specie, nickname,sex,status,health,stamina,level)
+values
+((select id_specie from specie where name = 'Dodo'),'Dodo','F','wild',350,120,120),
+((select id_specie from specie where name = 'Parasaur'),'Parasaur','M','wild',2086,1228,80)
+
