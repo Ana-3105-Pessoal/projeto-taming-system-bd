@@ -243,4 +243,13 @@ values
 ((select id_player from player where username = 'Helena Walker'), (select id_item from item where name = 'Extraordinary Kibble'),10),
 ((select id_player from player where username = 'Helena Walker'), (select id_item from item where name = 'Raw Mutton'),50)
 
+select player.username,item.name,inventory.quantity
+from inventory
+join player on id_player = fk_player
+join item on id_item = fk_item
+where username = 'Santiago'
 
+select player.username, tribe.name
+from player
+join tribe on id_tribe = fk_tribe
+where name = 'Tribe Tech'
