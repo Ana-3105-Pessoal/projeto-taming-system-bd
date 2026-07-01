@@ -88,7 +88,7 @@ select * from specie -- add 10 species
 select * from map -- add 9 maps
 select * from tribe -- add 3 tribes
 select * from item -- add 21 items
-select * from player -- add 0 players
+select * from player -- add 6 players
 select * from creature -- add 0 creatures
 select * from spawn_rate -- add 10 spawn_rate
 select * from creature_mutation -- add 0 creature_mutation
@@ -191,15 +191,16 @@ values
 ('Crossbow Journeyman','weapon','journeyman'),
 ('Crossbow Primitive','weapon','primitive'),
 ('Longneck Rifle Primitive','weapon','primitive'),
-('Longneck Rifle Mastercraft','weapon','mastercraft'),
-('Extraordinary Kibble','kibble','ascendant'),
-('Superior Kibble','kibble','journeyman'),
-('Simple Kibble','kibble','ramshackle'),
-('Raw Mutton','consumable','primitive'),
-('Metal Ingot','resources','primitive'),
-('Raw Meat','consumable','primitive'),
-('Wood','resources','primitive'),
-('Stone','resources','primitive'),
-('Argentavis Saddle','equipment','primitive'),
-('Rex Saddle','equipment','primitive'),
-('Therizinosaur Saddle','equipment','primitive')
+('Longneck Rifle Mastercraft','weapon','primiti')
+
+(rarity in('primitive', 'ramshackle', 'apprentice', 'journeyman', 'mastercraft', 'ascendant'))
+(type in('resources','consumable','weapon','equipment','kibble','ammo'))
+
+insert into player (username,level,health,stamina,join_date)
+values
+('Helena Walker',200,100000,1000,'2020-01-01'),
+('Edmund Rockwell',155,50000,2000,'2000-05-12'),
+('Mei Yin Li ',198,80000,3000,'2000-04-27'),
+('Gaius Marcellus Nerva',100,25000,1000,'2010-05-23'),
+('Diana',175,60000,1500,'2001-08-21'),
+('Santiago',199,90000,2500,'1990-12-30')
