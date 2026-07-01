@@ -191,7 +191,18 @@ values
 ('Crossbow Journeyman','weapon','journeyman'),
 ('Crossbow Primitive','weapon','primitive'),
 ('Longneck Rifle Primitive','weapon','primitive'),
-('Longneck Rifle Mastercraft','weapon','primiti')
+('Longneck Rifle Mastercraft','weapon','primitive')
+('Extraordinary Kibble','kibble','ascendant'),
+('Superior Kibble','kibble','journeyman'),
+('Simple Kibble','kibble','ramshackle'),
+('Raw Mutton','consumable','primitive'),
+('Metal Ingot','resources','primitive'),
+('Raw Meat','consumable','primitive'),
+('Wood','resources','primitive'),
+('Stone','resources','primitive'),
+('Argentavis Saddle','equipment','primitive'),
+('Rex Saddle','equipment','primitive'),
+('Therizinosaur Saddle','equipment','primitive')
 
 (rarity in('primitive', 'ramshackle', 'apprentice', 'journeyman', 'mastercraft', 'ascendant'))
 (type in('resources','consumable','weapon','equipment','kibble','ammo'))
