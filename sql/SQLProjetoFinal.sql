@@ -93,7 +93,7 @@ select * from creature -- add 0 creatures
 select * from spawn_rate -- add 10 spawn_rate
 select * from creature_mutation -- add 0 creature_mutation
 select * from domestication -- add 0 domestication
-select * from inventory -- add 0 inventory
+select * from inventory -- add 7 inventory
 
 insert into map (name,biome,difficulty)
 values
@@ -240,4 +240,7 @@ values
 ((select id_player from player where username = 'Santiago'), (select id_item from item where name = 'Tranquilizer Dart'),100),
 ((select id_player from player where username = 'Santiago'), (select id_item from item where name = 'Simple Rifle Ammo'),400),
 ((select id_player from player where username = 'Diana'), (select id_item from item where name = 'Therizinosaur Saddle'),1),
-((select id_player from player where username = 'Diana'), (select id_item from item where name = 'Therizinosaur Saddle'),1)
+((select id_player from player where username = 'Helena Walker'), (select id_item from item where name = 'Extraordinary Kibble'),10),
+((select id_player from player where username = 'Helena Walker'), (select id_item from item where name = 'Raw Mutton'),50)
+
+
